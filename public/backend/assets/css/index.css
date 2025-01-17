@@ -1,0 +1,197 @@
+.bg_status {
+    background-color: rgb(240, 240, 240);
+}
+
+
+/* .tab-pane {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+} */
+.menu-info {
+    flex: 0 1 calc(20% - 10px);
+    /* Đặt chiều rộng cho mỗi phần tử, đảm bảo vừa 5 phần tử trên 1 dòng */
+    box-sizing: border-box;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed !important;
+}
+
+
+.cursor-not-allowed-menu {
+    position: relative;
+    opacity: 0.4;
+    cursor: not-allowed !important;
+}
+
+/* 
+.cursor-not-allowed-menu:hover::after {
+    content: "Đã lên món!";
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 9999;
+    opacity: 1;
+    pointer-events: none; 
+} */
+
+.cursor-not-allowed-menu::after {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.footer-left {
+    text-align: left;
+    /* Căn chữ bên trái */
+    flex-grow: 1;
+    /* Đẩy nội dung khác về phía bên phải */
+}
+
+.table-info {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+
+.table-info.selected {
+    border-color: #00ff40;
+    background-color: #d1ffe4 !important;
+}
+
+.menu-info {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+/* .menu-info:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+} */
+
+.menu-info.selected {
+    border-color: #00ff40;
+    background-color: #d1ffe4;
+}
+
+
+
+/* .table-info.selected {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    background-color: #d1ffe4 !important;
+    border-color: rgba(47, 217, 62, 0.9) !important;
+}
+
+.table-info.selected::after {
+    content: "Bàn đang chọn" !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: rgba(175, 224, 28, 0.9) !important;
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    text-transform: uppercase !important;
+} */
+
+
+
+/* Giao diện Sold Out */
+.table-info.disableTable {
+    opacity: 0.6;
+    /* Làm mờ */
+    pointer-events: none;
+    /* Không thể click */
+    cursor: not-allowed;
+    /* Con trỏ cấm */
+    background-color: #f9f9f9;
+    /* Nền nhạt */
+    border-color: rgba(175, 224, 28, 0.9);
+}
+
+.table-info.disableTable::after {
+    content: "Đang sử dụng";
+    /* Thêm chữ */
+    transform: translate(-50%, -50%);
+    background-color: rgba(175, 224, 28, 0.9);
+    /* Nền mờ */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+
+/* Giao diện Sold Out */
+.table-info.reserved {
+    opacity: 0.6 !important;
+    /* Làm mờ */
+    pointer-events: none !important;
+    /* Không thể click */
+    cursor: not-allowed !important;
+    /* Con trỏ cấm */
+    background-color: #f9f9f9 !important;
+    /* Nền nhạt */
+    border-color: rgba(78, 36, 202, 0.9) !important;
+}
+
+.table-info.reserved::after {
+    content: "Có người đặt" !important;
+    /* Thêm chữ */
+    transform: translate(-50%, -50%) !important;
+    background-color: rgba(78, 36, 202, 0.9) !important;
+    /* Nền mờ */
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    text-transform: uppercase !important;
+}
+
+
+/* Giao diện Sold Out */
+.table-info.unactive {
+    opacity: 0.6 !important;
+    /* Làm mờ */
+    pointer-events: none !important;
+    /* Không thể click */
+    cursor: not-allowed !important;
+    /* Con trỏ cấm */
+    background-color: #f9f9f9 !important;
+    /* Nền nhạt */
+    border-color: rgba(255, 0, 0, 0.9) !important;
+}
+
+.table-info.unactive::after {
+    content: "Không hoạt động" !important;
+    /* Thêm chữ */
+    transform: translate(-50%, -50%) !important;
+    background-color: rgba(255, 0, 0, 0.9) !important;
+    /* Nền mờ */
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    text-transform: uppercase !important;
+}
