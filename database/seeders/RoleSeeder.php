@@ -43,49 +43,9 @@ class RoleSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             [
-                'full_name' => 'Nguyễn Viết Dương',
-                'phone' => '0385906406',
-                'email' => 'duongnv@hblab.vn',
-                'password' => Hash::make('12345678'), // Mã hóa mật khẩu
-                'status' => 'normal',
-                'role_id' => 4, // Giả định rằng bạn đã có một role với ID = 1
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'full_name' => 'Phùng Mạnh Đức',
-                'phone' => '0889564869',
-                'email' => 'ducpmph33321@fpt.edu.vn',
-                'password' => Hash::make('12345678'), // Mã hóa mật khẩu
-                'status' => 'normal',
-                'role_id' => 4, // Giả định rằng bạn đã có một role với ID = 1
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'full_name' => 'Nguyễn Bá Cường',
-                'phone' => '0865468404',
-                'email' => 'Cuongato2k4@gmail.com',
-                'password' => Hash::make('12345678'), // Mã hóa mật khẩu
-                'status' => 'normal',
-                'role_id' => 4, // Giả định rằng bạn đã có một role với ID = 2
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'full_name' => 'Bùi Ngọc Thanh Trúc',
-                'phone' => '0975107204',
-                'email' => 'trucbntdev7204@gmail.com',
-                'password' => Hash::make('12345678'), // Mã hóa mật khẩu
-                'status' => 'normal',
-                'role_id' => 4, // Giả định rằng bạn đã có một role với ID = 2
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'full_name' => 'Nguyễn Huy Tân',
-                'phone' => '0886635676',
-                'email' => 'tandz20004@gmail.com',
+                'full_name' => 'Nguyễn A',
+                'phone' => '0976512342',
+                'email' => 'user@gmail.com',
                 'password' => Hash::make('12345678'), // Mã hóa mật khẩu
                 'status' => 'normal',
                 'role_id' => 4, // Giả định rằng bạn đã có một role với ID = 2
