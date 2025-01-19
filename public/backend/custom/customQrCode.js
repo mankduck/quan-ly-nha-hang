@@ -22,8 +22,8 @@
             }
 
             const MY_BANK = {
-                BANK_ID: 'MB',
-                ACCOUNT_NO: '0385906406',
+                BANK_ID: 'TECHCOMBANK',
+                ACCOUNT_NO: '19038416295016',
                 INFO: `Thanh toan don dat ban${reservationCode}`
             };
 

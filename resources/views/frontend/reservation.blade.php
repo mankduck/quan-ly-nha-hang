@@ -246,59 +246,6 @@
         </div>
     </div><!--end container-->
 
-    <script>
-        // $(document).ready(function() {
-        //     $('#reservationForm').on('submit', function(event) {
-        //         event.preventDefault(); // Prevent the default form submission
-
-        //         // Get form data
-        //         var formData = $(this).serialize();
-
-        //         // Show the loading overlay
-        //         $('#loadingOverlay').show();
-
-        //         $.ajax({
-        //             url: $(this).attr('action'), // Lấy URL từ thuộc tính action của form
-        //             type: 'POST',
-        //             data: formData,
-        //             success: function(response) {
-        //                 // Kiểm tra nếu thành công
-        //                 if (response.success) {
-        //                     // Lưu thông tin đơn đặt bàn vào localStorage
-        //                     let reservations = JSON.parse(localStorage.getItem(
-        //                         'myReservation')) || [];
-        //                     // Thêm đơn đặt chỗ mới vào mảng
-        //                     reservations.push(response.data.id);
-        //                     // Lưu lại mảng vào localStorage
-        //                     localStorage.setItem('myReservation', JSON.stringify(reservations));
-
-        //                     // Tạo và hiển thị thông báo thành công
-        //                     var successMessage = '<div class="success-message fade-in show">' +
-        //                         response.message +
-        //                         '<span class="close" onclick="$(this).parent().remove();">&times;</span>' +
-        //                         '</div>';
-        //                     $('#responseMessage').html(successMessage);
-
-        //                     // Reset form
-        //                     $('#reservationForm')[0].reset();
-
-        //                     $('#loadingOverlay').hide(); // Ẩn overlay khi xong
-
-        //                     // Xóa thông báo sau 2 giây
-        //                     setTimeout(function() {
-        //                         $('#responseMessage').html('');
-        //                     }, 2000);
-        //                 } else {
-        //                     console.log('Error: ' + response.message);
-        //                 }
-        //             },
-        //             error: function(xhr) {
-        //                 console.log(xhr);
-        //             }
-        //         });
-        //     });
-        // });
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
