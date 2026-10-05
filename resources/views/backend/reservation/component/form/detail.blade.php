@@ -25,9 +25,9 @@
                 <li class="mt-2"><i class="las la-calendar-check me-2 text-secondary fs-22 align-middle"></i>
                     <b> Thời gian đặt </b> : {{ $data->reservation_time ?? 'Không có dữ liệu' }}
                 </li>
-                <li class="mt-2"><i class="las la-clipboard-list me-2 text-secondary fs-22 align-middle"></i>
+                <!-- <li class="mt-2"><i class="las la-clipboard-list me-2 text-secondary fs-22 align-middle"></i>
                     <b> Yêu cầu đặc biệt </b> : {{ $data->special_request ?? 'Không có dữ liệu' }}
-                </li>
+                </li> -->
                 <li class="mt-2"><i class="las la-info-circle me-2 text-secondary fs-22 align-middle"></i>
                     <b> Trạng thái </b> : {{ $data->status ?? 'Không có dữ liệu' }}
                 </li>

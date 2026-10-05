@@ -72,18 +72,18 @@ class ReservationController extends Controller
         $data = $request->validated();
         try {
             // Kiểm tra nếu đã có đơn đặt hàng chờ xác nhận
-            $isIpAwaitingConfirmation = $this->reservationService->isIpAwaitingConfirmation($request->ip());
-            $isOrderAwaitingConfirmation = $this->reservationService->isOrderAwaitingConfirmation($data['phone'], $data['email']);
+            // $isIpAwaitingConfirmation = $this->reservationService->isIpAwaitingConfirmation($request->ip());
+            // $isOrderAwaitingConfirmation = $this->reservationService->isOrderAwaitingConfirmation($data['phone'], $data['email']);
             
-            if (($isIpAwaitingConfirmation && $isOrderAwaitingConfirmation) || $isIpAwaitingConfirmation || $isOrderAwaitingConfirmation) {
-                return redirect()->route('reservation')->with('error', 'Để tránh SPAM, bạn chỉ có thể gửi yêu cầu mỗi 4 tiếng. Vui lòng thử lại sau. Xin cảm ơn!');
-            }            
+            // if (($isIpAwaitingConfirmation && $isOrderAwaitingConfirmation) || $isIpAwaitingConfirmation || $isOrderAwaitingConfirmation) {
+            //     return redirect()->route('reservation')->with('error', 'Để tránh SPAM, bạn chỉ có thể gửi yêu cầu mỗi 4 tiếng. Vui lòng thử lại sau. Xin cảm ơn!');
+            // }            
     
             // Tạo mã xác nhận
             $confirmationCode = strtoupper(Str::random(6));
     
             // Lưu dữ liệu đơn hàng tạm thời vào database với trạng thái 'verification_pending'
-            $data['status'] = 'verification_pending';
+            $data['status'] = 'pending';
             $data['ipAddress'] = $request->ip();
             $data['confirmation_code'] = $confirmationCode;
             $reservationNew = $this->reservationService->createReservation($data);
@@ -91,7 +91,7 @@ class ReservationController extends Controller
             // Gửi email xác nhận
             $confirmationUrl = route('reservation.confirm', $reservationNew->confirmation_code);
             Mail::to($data['email'])->send(new ReservationVerificationMail($confirmationUrl));
-    
+
             return redirect()->route('reservation')->with('success', 'Vui lòng kiểm tra email của bạn để xác nhận đặt bàn!');
         } catch (\Exception $e) {
             return redirect()->route('reservation')->with('error', 'Đặt bàn thất bại!');
@@ -103,7 +103,7 @@ class ReservationController extends Controller
         // Tìm đơn hàng theo mã xác nhận
         $reservation = Reservation::whereNotNull('confirmation_code')
         ->where('confirmation_code', $code)
-        ->where('status', 'verification_pending')
+        ->where('status', 'pending')
         ->first();
 
         if (!$reservation) {
@@ -111,7 +111,7 @@ class ReservationController extends Controller
         }
 
         // Cập nhật trạng thái đơn hàng thành 'pending'
-        $reservation->update(['status' => 'pending', 'confirmation_code' => null]);
+        $reservation->update(['status' => 'confirmed', 'confirmation_code' => null]);
 
         $notificationData = [
             'title' => __('messages.system.titleNotificationReservation'),
@@ -120,11 +120,13 @@ class ReservationController extends Controller
 
         $this->notificationService->createNotification($notificationData);
         event(new NotificationEvent($reservation));
+        
 
         // Send confirmation email
         if (isset($reservation->email)) {
             Mail::to($reservation->email)->send(new ReservationConfirmed($reservation));
         }
+
 
         return redirect()->route('reservation')->with('success', 'Đặt bàn thành công!');
     }

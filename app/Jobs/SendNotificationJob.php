@@ -30,12 +30,22 @@ class SendNotificationJob implements ShouldQueue
     public function handle()
     {
         try {
-            Log::info('SendNotificationJob started', ['message' => $this->message]);
+            Log::info('SendNotificationJob started', [
+                'message' => $this->message
+            ]);
 
-            // Phát sự kiện để gửi thông báo
-            event(new NotificationEvent($this->title, $this->message, $this->type, $this->data));
+            $dataNotification = [
+                'title' => $this->title,
+                'message' => $this->message,
+                'type' => $this->type,
+                'data' => $this->data,
+            ];
 
-            Log::info('SendNotificationJob completed successfully', ['message' => $this->message]);
+            event(new NotificationEvent($dataNotification));
+
+            Log::info('SendNotificationJob completed successfully', [
+                'message' => $this->message
+            ]);
         } catch (\Exception $e) {
             Log::error('Error in SendNotificationJob', [
                 'message' => $this->message ?? 'N/A',

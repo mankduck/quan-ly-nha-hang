@@ -175,6 +175,8 @@
             },
             data: JSON.stringify(data),
             success: function (response) {
+                hideSpinner()
+
                 if (response.success === true) {
                     Swal.fire({
                         icon: 'success',
@@ -194,6 +196,8 @@
                 }
             },
             error: function (xhr, status, error) {
+                hideSpinner()
+
                 let errorMessage = 'Đã xảy ra lỗi. Vui lòng thử lại.';
 
                 // Kiểm tra nếu server trả về message cụ thể
@@ -364,9 +368,12 @@
                         };
 
                         $('#pay').modal('hide');
+                        showSpinner()
+                        console.log(document.querySelector('.spinner'));
 
                         CUONG.addInvoice(data);
                         CUONG.exportAndSavePDF(reservationId);
+                        // hideSpinner()
                         // setTimeout(() => {
                         //     window.location.reload();
                         // }, 3000);
@@ -428,6 +435,25 @@
             $('#pay').find('.feedback-voucher').text('');
             $('#pay').find('.voucher-discount').hide();  // Đặt lại giảm giá về 0
         });
+    }
+
+    function showSpinner() {
+
+        document.querySelector('.overlay').style.display = 'block';
+        console.log(1);
+
+        document.querySelector('.spinner').style.display = 'block';
+        console.log(2);
+
+        document.querySelector('.startbar').classList.add('blur'); // Thêm lớp làm mờ startbar
+        document.querySelector('.topbar').classList.add('blur'); // Thêm lớp làm mờ topbar
+    }
+
+    function hideSpinner() {
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('.startbar').classList.remove('blur'); // Xóa lớp làm mờ startbar
+        document.querySelector('.topbar').classList.remove('blur'); // Xóa lớp làm mờ topbar
     }
 
     //End Show Modal Data

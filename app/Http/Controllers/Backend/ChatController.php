@@ -38,6 +38,8 @@ class ChatController extends Controller
             'content' => $request->content,
         ]);
 
+        event(new MessageSent($message));
+
         return response()->json($message, 201);
     }
 
@@ -46,10 +48,10 @@ class ChatController extends Controller
         // Lấy tất cả tin nhắn giữa người dùng hiện tại và người dùng đã chỉ định
         $messages = Message::where(function ($query) use ($userId) {
             $query->where('sender_id', auth()->id())
-                  ->where('receiver_id', $userId);
+                ->where('receiver_id', $userId);
         })->orWhere(function ($query) use ($userId) {
             $query->where('sender_id', $userId)
-                  ->where('receiver_id', auth()->id());
+                ->where('receiver_id', auth()->id());
         })->get();
 
         return response()->json($messages);
@@ -66,8 +68,8 @@ class ChatController extends Controller
             ->pluck('receiver_id') // Lấy ID của người nhận
             ->merge(
                 Message::where('receiver_id', $currentUserId)
-                ->distinct()
-                ->pluck('sender_id') // Lấy ID của người gửi
+                    ->distinct()
+                    ->pluck('sender_id') // Lấy ID của người gửi
             )
             ->unique()
             ->toArray();

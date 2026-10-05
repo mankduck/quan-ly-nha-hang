@@ -161,7 +161,14 @@ class UserController extends Controller
 
             Log::info('Starting update process for account ID: ' . $id); // Log thông tin
 
-            event(new NotificationEvent($title, $message, 'info', Auth::user()->full_name));
+            $dataNotification = [
+                'title' => $title,
+                'message' => $message,
+                'type' => 'info',
+                'data' => Auth::user()->full_name,
+            ];
+
+            event(new NotificationEvent($dataNotification));
             // dispatch(new SendNotificationJob($title, $message, 'info', Auth::user()->full_name)); // Thay thế 'info' và $review nếu cần
 
             $dataNotification = [

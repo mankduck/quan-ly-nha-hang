@@ -42,7 +42,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return view(self::PATH_VIEW,  [
+        return view(self::PATH_VIEW, [
             'dataReviews' => $this->reviewService->getAllReviews([], 4),
         ]);
     }
@@ -59,8 +59,10 @@ class ReviewController extends Controller
 
         try {
             // Create a new review
-            $this->reviewService->createReview($data);
-            
+            $review = $this->reviewService->createReview($data);
+
+            event(new ReviewEvent($review));
+
             return redirect()->back()->with('success', 'Đánh giá thành công!!');
         } catch (\Exception $e) {
             // Log when an error occurs

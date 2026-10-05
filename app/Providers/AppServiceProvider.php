@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
             $restaurantDatas = $restaurantDatas->first();
 
             $description = json_decode($restaurantDatas->description, true);
-            $priceData = json_decode($restaurantDatas->price, true); // Giả sử bạn có giá trong cơ sở dữ liệu cũng được lưu dưới dạng JSON
+            $priceData = json_decode($restaurantDatas->price, true);
      
          
     

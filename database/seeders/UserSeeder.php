@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'email' => 'user' . $i . '@example.com',
                 'password' => $password, // Mã hóa mật khẩu
                 'status' => 'normal',
-                'role_id' => 3, // Giả định rằng bạn đã có role với ID từ 1 đến 3
+                'role_id' => 4, // Giả định rằng bạn đã có role với ID từ 1 đến 3
                 'created_at' => $now,
                 'updated_at' => $now,
             ];

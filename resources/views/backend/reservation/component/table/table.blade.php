@@ -19,9 +19,15 @@
     <tbody>
         @if (isset($datas) && is_object($datas) && $datas->isNotEmpty())
             @foreach ($datas as $data)
+                @php
+                    if ($data->status == 'verification_pending') {
+                        $data->status = 'pending';
+                    }
+                    ;
+                @endphp
                 <tr class="{{ $data->status == 'pending' ? 'bg-warning bg-opacity-50' : '' }} tdReservation-{{ $data->id }}"
-                    data-reservation="{{ $data->id }}" data-table="{{ $data->table_id }}"
-                    data-guest="{{ $data->guests }}" data-reservation-code="{{ $data->code }}">
+                    data-reservation="{{ $data->id }}" data-table="{{ $data->table_id }}" data-guest="{{ $data->guests }}"
+                    data-reservation-code="{{ $data->code }}">
                     <td style="width: 16px;">
                         <div class="form-check">
                         </div>
@@ -31,11 +37,14 @@
                     <td>
                         <ul>
                             <li>{{ __('messages.reservation.fields.full_name') }}:
-                                {{ $data->name ?? __('messages.system.no_data_available') }}</li>
+                                {{ $data->name ?? __('messages.system.no_data_available') }}
+                            </li>
                             <li>{{ __('messages.reservation.fields.email') }}:
-                                {{ $data->email ?? __('messages.system.no_data_available') }}</li>
+                                {{ $data->email ?? __('messages.system.no_data_available') }}
+                            </li>
                             <li>{{ __('messages.reservation.fields.phone') }}:
-                                {{ $data->phone ?? __('messages.system.no_data_available') }}</li>
+                                {{ $data->phone ?? __('messages.system.no_data_available') }}
+                            </li>
                         </ul>
                     </td>
                     <td>{{ $data->guests ?? __('messages.system.no_data_available') }}</td>
@@ -46,44 +55,39 @@
                     <td>
                         @php
                             $status = request('status') ?: old('status');
+                            // var_dump($data->status);
                             $statuses = __('messages.reservation.status');
                         @endphp
 
-                        <select name="status" class="form-select status selectReservation"
-                            data-account-id="{{ $data->id }}">
+                        <select name="status" class="form-select status selectReservation" data-account-id="{{ $data->id }}">
                             @foreach ($statuses as $key => $option)
                                 @if ($data->status == 'pending')
                                     @if ($key != 'completed' && $key != 'arrived')
-                                        <option value="{{ $key }}" @selected($status == $key)
-                                            @selected($data->status == $key)>
+                                        <option value="{{ $key }}" @selected($status == $key) @selected($data->status == $key)>
                                             {{ $option }}
                                         </option>
                                     @endif
                                 @elseif ($data->status == 'confirmed')
                                     @if ($key != 'pending' && $key != 'canceled' && $key != 'completed')
-                                        <option value="{{ $key }}" @selected($status == $key)
-                                            @selected($data->status == $key)>
+                                        <option value="{{ $key }}" @selected($status == $key) @selected($data->status == $key)>
                                             {{ $option }}
                                         </option>
                                     @endif
                                 @elseif ($data->status == 'canceled')
                                     @if ($key == 'canceled')
-                                        <option value="{{ $key }}" @selected($status == $key)
-                                            @selected($data->status == $key)>
+                                        <option value="{{ $key }}" @selected($status == $key) @selected($data->status == $key)>
                                             {{ $option }}
                                         </option>
                                     @endif
                                 @elseif ($data->status == 'arrived')
                                     @if ($key != 'pending' && $key != 'canceled' && $key != 'confirmed' && $key != 'completed')
-                                        <option value="{{ $key }}" @selected($status == $key)
-                                            @selected($data->status == $key)>
+                                        <option value="{{ $key }}" @selected($status == $key) @selected($data->status == $key)>
                                             {{ $option }}
                                         </option>
                                     @endif
                                 @else
                                     @if ($key != 'pending' && $key != 'completed')
-                                        <option value="{{ $key }}" @selected($status == $key)
-                                            @selected($data->status == $key)>
+                                        <option value="{{ $key }}" @selected($status == $key) @selected($data->status == $key)>
                                             {{ $option }}
                                         </option>
                                     @endif
@@ -112,8 +116,8 @@
                                 <button class=" btn btn-primary">Đặt món</button>
                             </a>
 
-                            <button onclick="executeExample('handleDismiss', 'myForm_{{ $data->id }}')"
-                                type="button" class="btn btn-warning">
+                            <button onclick="executeExample('handleDismiss', 'myForm_{{ $data->id }}')" type="button"
+                                class="btn btn-warning">
                                 Thanh toán
                             </button>
                         </div>

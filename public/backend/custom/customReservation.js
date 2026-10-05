@@ -17,6 +17,8 @@
                     reservation_id: reservationId
                 }
             });
+
+
             return response;
         } catch (error) {
             console.error(error);
@@ -174,8 +176,11 @@
                     executeExample('success');
                 },
                 error: function (xhr, status, error) {
+                    console.log(xhr.responseJSON.message);
+                    
+                    var spinner = document.querySelector('.spinner')
                     // Ẩn spinner khi có lỗi
-                    spinner.style.display = 'none';
+                    hideSpinner()
                     executeExample('error');
                 }
             });
